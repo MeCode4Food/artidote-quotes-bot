@@ -22,7 +22,7 @@ jobs:
         aws-region: ${{ secrets.AWS_REGION }}
     - name: Try to get function
       run: |
-        echo ::set-env name=TEST_VARIABLE:: $(echo "Hello there general kenobi")
+        echo ::set-env name=TEST_VARIABLE:: $(aws lambda list-functions --query 'Functions[?FunctionName==`${{ secrets.LAMBDA_NAME }}`].FunctionName[]' --output text)
     - name: Try to print variable
       run: echo $TEST_VARIABLE
     - name: Deploy to lambda
