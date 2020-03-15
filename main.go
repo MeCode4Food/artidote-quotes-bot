@@ -12,7 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/ssm"
 )
 
-func handler(_ events.CloudWatchEvent) int {
+func handler(_ events.CloudWatchEvent) (int, error) {
 	fmt.Println("hi")
 	session := util.StartAWSSession("ap-southeast-1")
 	ssmsvc := ssm.New(session)
@@ -26,11 +26,11 @@ func handler(_ events.CloudWatchEvent) int {
 	fmt.Println(roomIDs)
 	println(telegramBotKey)
 
-	return 0
+	return 0, nil
 }
 
 func main() {
-	if os.Args[1] == "debug" {
+	if len(os.Args) >= 2 && os.Args[1] == "debug" {
 		os.Setenv("AWS_SDK_LOAD_CONFIG", "1")
 		os.Setenv("AWS_PROFILE", os.Args[2])
 		handler(events.CloudWatchEvent{})

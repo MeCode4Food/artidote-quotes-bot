@@ -3,6 +3,7 @@ package util
 import (
 	"artidote-quote/constants"
 	"fmt"
+	"log"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -29,6 +30,10 @@ func GetRoomIDsFromDB(session *session.Session) []string {
 
 	if err != nil {
 		fmt.Println(err.Error())
+	}
+
+	if len(result.Items) == 0 {
+		log.Fatalln("No results returned")
 	}
 
 	type DynamoDBItem struct {
