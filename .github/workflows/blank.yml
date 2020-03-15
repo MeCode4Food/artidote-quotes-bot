@@ -20,6 +20,11 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ secrets.AWS_REGION }}
+    - name: Try to get function
+      run: |
+        echo ::set-env name=TEST_VARIABLE:: $(echo "Hello there general kenobi")
+    - name: Try to print variable
+      run: echo $TEST_VARIABLE
     - name: Deploy to lambda
       run: |
         aws apigateway get-rest-apis
