@@ -18,7 +18,7 @@ func SendMessagesToRooms(message string, roomIDs []string, telegramBotKey string
 	if err != nil {
 		log.Fatalln(err)
 	}
-	c := make(chan bool)
+	// c := make(chan bool)
 	var wg sync.WaitGroup
 
 	for _, roomID := range roomIDs {
@@ -34,10 +34,10 @@ func SendMessagesToRooms(message string, roomIDs []string, telegramBotKey string
 			if err != nil {
 				log.Fatalln(err)
 			}
-			c <- true
 			wg.Done()
 		}()
 	}
 
 	wg.Wait()
+	return
 }
