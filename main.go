@@ -2,6 +2,7 @@ package main
 
 import (
 	"artidote-quote/constants"
+	"artidote-quote/instagram"
 	"artidote-quote/telegram"
 	"artidote-quote/util"
 	"fmt"
@@ -18,14 +19,12 @@ func handler(_ events.CloudWatchEvent) (int, error) {
 	ssmsvc := ssm.New(session)
 
 	telegramBotKey := util.GetSSMParams(ssmsvc, constants.PSKTelegramBotKey)
-	messageToSend := []string{"test"}
-	a := messageToSend[0]
-	roomIDs := util.GetRoomIDsFromDB(session)
-	telegram.SendMessagesToRooms(a, roomIDs, telegramBotKey)
-	println(a)
-	fmt.Println(roomIDs)
-	println(telegramBotKey)
 
+	messageToSend := instagram.GetInstagramMessage()
+	roomIDs := util.GetRoomIDsFromDB(session)
+	telegram.SendMessagesToRooms(messageToSend, roomIDs, telegramBotKey)
+	println(messageToSend)
+	fmt.Println(roomIDs)
 	return 0, nil
 }
 

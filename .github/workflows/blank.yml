@@ -12,14 +12,14 @@ jobs:
       uses: actions/setup-go@v1
       with:
         go-version: 1.13
-    - name: Build something
-      run: make build
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with: 
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ secrets.AWS_REGION }}
+    - name: Build something
+      run: make build
     - name: Try to get function
       run: |
         echo ::set-env name=TEST_VARIABLE:: $(aws lambda list-functions --query 'Functions[?FunctionName==`${{ secrets.LAMBDA_NAME }}`].FunctionName[]' --output text)

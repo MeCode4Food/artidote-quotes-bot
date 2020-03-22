@@ -15,7 +15,7 @@ import (
 func GetRoomIDsFromDB(session *session.Session) []string {
 
 	svc := dynamodb.New(session)
-	println("getting item 2")
+
 	result, err := svc.Query(&dynamodb.QueryInput{
 		TableName: aws.String(constants.DBName),
 		KeyConditions: map[string]*dynamodb.Condition{
