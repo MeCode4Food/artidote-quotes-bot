@@ -27,6 +27,12 @@ jobs:
         echo ::set-env name=TEST_VARIABLE:: $(aws lambda list-functions --query "Functions[?FunctionName=='${LAMBDA_NAME}'].FunctionName[]" --output text)
     - name: Try to print variable
       run: echo $TEST_VARIABLE
+    - name: Do if exist
+      if: ${{env.TEST_VARIABLE == env.LAMBDA_NAME}}
+      run: echo "Exists"
+    - name: Do if not exist
+      run: echo "Does not exist"
+      if: ${{env.TEST_VARIABLE == ''}}
     - name: Deploy to lambda
       run: |
         aws apigateway get-rest-apis
