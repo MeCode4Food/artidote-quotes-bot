@@ -2,7 +2,7 @@ name: CI
 
 on: [push]
 env:
-  LAMBDA_NAME: Artidote-Quote
+  LAMBDA_NAME: Artidote-Quot
 
 jobs:
   build:
