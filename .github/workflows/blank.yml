@@ -24,7 +24,7 @@ jobs:
       run: make build
     - name: Try to get function
       run: |
-        echo ::set-env name=TEST_VARIABLE:: $(aws lambda list-functions --query 'Functions[?FunctionName==`$LAMBDA_NAME`].FunctionName[]' --output text)
+        aws lambda list-functions --query 'Functions[?FunctionName==`$LAMBDA_NAME`].FunctionName[]' --output text
     - name: Try to print variable
       run: echo $TEST_VARIABLE
     - name: Deploy to lambda
