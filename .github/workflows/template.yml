@@ -2,7 +2,7 @@ name: CI
 
 on: [push]
 env:
-  LAMBDA_NAME: Artidote-Quot
+  LAMBDA_NAME: Artidote-Quote
 
 jobs:
   build:
@@ -24,15 +24,15 @@ jobs:
       run: make build
     - name: Try to get function
       run: |
-        echo ::set-env name=TEST_VARIABLE::$(aws lambda list-functions --query "Functions[?FunctionName=='${LAMBDA_NAME}'].FunctionName[]" --output text)
+        echo ::set-env name=GET_FUNCTION_NAME::$(aws lambda list-functions --query "Functions[?FunctionName=='${LAMBDA_NAME}'].FunctionName[]" --output text)
     - name: Try to print variable
-      run: echo $TEST_VARIABLE
-    - name: Do if exist
-      if: env.TEST_VARIABLE == env.LAMBDA_NAME
-      run: echo "Exists"
-    - name: Do if not exist
-      run: echo "Does not exist"
-      if: env.TEST_VARIABLE == ''
+      run: echo $GET_FUNCTION_NAME
+    - name: Update function if exist
+      run: aws lambda update-function-code --function-name $(LAMBDA_NAME) --zip-file fileb://function.zip
+      if: env.GET_FUNCTION_NAME == env.LAMBDA_NAME
+    - name: Create Lambda if does not exist
+      if: env.GET_FUNCTION_NAME == ''
+      run: aws lambda create-function --function-name $(LAMBDA_NAME) --runtime nodejs10.x --role $(AWS_LAMBDA_ROLE) --handler index.handler --zip-file fileb://function.zip
     - name: Deploy to lambda
       run: |
         aws apigateway get-rest-apis
