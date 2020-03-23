@@ -109,8 +109,8 @@ func formatTextPost(instagramTextPosts []TextPosts, itr int) string {
 
 	splitText := strings.Split(post.Text, seperator)
 	if len(post.ThumbnailResources) > 1 {
-		// 240 x 240 picture link
-		imageURL = post.ThumbnailResources[1].Source
+		// 320 x 320 picture link
+		imageURL = post.ThumbnailResources[2].Source
 	}
 
 	if len(splitText) == 2 {

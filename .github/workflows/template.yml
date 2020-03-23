@@ -3,6 +3,7 @@ name: CI
 on: [push]
 env:
   LAMBDA_NAME: Artidote-Quot
+  AWS_LAMBDA_ROLE: ${{ secrets.AWS_LAMBDA_ROLE }}
 
 jobs:
   build:
