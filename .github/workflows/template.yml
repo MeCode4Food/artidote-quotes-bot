@@ -33,4 +33,4 @@ jobs:
       if: env.GET_FUNCTION_NAME == env.LAMBDA_NAME
     - name: Create Lambda if does not exist
       if: env.GET_FUNCTION_NAME == ''
-      run: aws lambda create-function --function-name $LAMBDA_NAME --runtime nodejs10.x --role $AWS_LAMBDA_ROLE --handler index.handler --zip-file fileb://function.zip
+      run: aws lambda create-function --function-name $LAMBDA_NAME --runtime nodejs10.x --role $AWS_LAMBDA_ROLE --handler ./bin/artidote-quote --zip-file fileb://function.zip
