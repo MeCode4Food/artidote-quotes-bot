@@ -73,7 +73,6 @@ func formatInstagramResponse(instagramResponse Response) []TextPosts {
 		}
 		// log.Println(string(i) + " " + post.InstagramPost.EdgeMediaToCaption.Edges[0].Node.Text)
 	}
-	println(textPosts[0].Timestamp.Format(time.RFC3339))
 	return textPosts
 }
 
