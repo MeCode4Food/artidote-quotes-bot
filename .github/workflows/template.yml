@@ -28,11 +28,8 @@ jobs:
     - name: Try to print variable
       run: echo $GET_FUNCTION_NAME
     - name: Update function if exist
-      run: aws lambda update-function-code --function-name $(LAMBDA_NAME) --zip-file fileb://function.zip
+      run: aws lambda update-function-code --function-name $LAMBDA_NAME --zip-file fileb://function.zip
       if: env.GET_FUNCTION_NAME == env.LAMBDA_NAME
     - name: Create Lambda if does not exist
       if: env.GET_FUNCTION_NAME == ''
       run: aws lambda create-function --function-name $(LAMBDA_NAME) --runtime nodejs10.x --role $(AWS_LAMBDA_ROLE) --handler index.handler --zip-file fileb://function.zip
-    - name: Deploy to lambda
-      run: |
-        aws apigateway get-rest-apis
