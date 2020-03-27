@@ -2,7 +2,7 @@ name: CI
 
 on: [push]
 env:
-  LAMBDA_NAME: Artidote-Quot
+  LAMBDA_NAME: Artidote-Quote
   AWS_LAMBDA_ROLE: ${{ secrets.AWS_LAMBDA_ROLE }}
 
 jobs:
