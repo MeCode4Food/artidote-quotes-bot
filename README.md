@@ -1,5 +1,7 @@
 # Daily Artidote Quote
 
+![Telegram Example](/docs/telegram_example.png?raw=true "Telegram Example")
+
 ## Who is The Artidote?
 
 > [The Artidote is] a virtual space where to story-tell, empathize, bond and heal through art. 
@@ -7,6 +9,8 @@
 > \- Jovanny Varela Ferreyra, Creator of The Artidote
 
 The Artidote is an account on Facebook/Instagram/Twitter where short stories/quotes are shared alongside a piece of artwork, with a focus on mental health
+
+![Example Post](/docs/example.png?raw=true "Example Post")
 
 ## Purpose
 
