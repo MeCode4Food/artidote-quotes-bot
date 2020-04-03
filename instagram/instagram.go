@@ -54,7 +54,6 @@ func formatInstagramResponse(instagramResponse Response) []TextPosts {
 	textPosts := []TextPosts{}
 	for _, post := range instagramResponse.GraphQLResponse.User.RecentTimeline.Edges {
 		if post.InstagramPost.Typename == "GraphImage" {
-
 			// Assign instagram text to post
 			var postText string
 			if len(post.InstagramPost.EdgeMediaToCaption.Edges) >= 1 {
@@ -103,7 +102,7 @@ func formatTextPost(instagramTextPosts []TextPosts, itr int) string {
 	var imageURL string
 	var text string
 	post := instagramTextPosts[itr]
-	seperator := "art"
+	seperator := "\nart"
 
 	splitText := strings.Split(post.Text, seperator)
 	if len(post.ThumbnailResources) > 1 {
@@ -111,8 +110,12 @@ func formatTextPost(instagramTextPosts []TextPosts, itr int) string {
 		imageURL = post.ThumbnailResources[2].Source
 	}
 
-	if len(splitText) == 2 {
-		text = splitText[0] + "\n\n" + imageURL + "\n\nart" + splitText[1]
+	if len(splitText) >= 2 {
+		text = splitText[0] + "\n\n" + imageURL + "\n\nart"
+
+		for i := 1; i < len(splitText); i++ {
+			text += splitText[i]
+		}
 	} else {
 		text = splitText[0]
 	}

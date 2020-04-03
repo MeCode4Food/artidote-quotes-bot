@@ -11,7 +11,7 @@ Resources:
       Runtime: go1.x
         
       # This is the Lambda function's handler.
-      Handler: ./debug/artidote-quote
+      Handler: ./bin/artidote-quote
       
       # Event sources to attach to this function. In this case, we are attaching
       # one API Gateway endpoint to the Lambda function. The function is
