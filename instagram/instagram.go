@@ -22,7 +22,6 @@ func GetInstagramMessage() string {
 		log.Fatalln("No Posts Retrieved. Is the user's recent timeline empty?")
 	}
 	itr := determineItrToSend(len(instagramTextPosts), instagramTextPosts[0].Timestamp)
-	itr = 0
 	text := formatTextPost(instagramTextPosts, itr)
 	return text
 }
