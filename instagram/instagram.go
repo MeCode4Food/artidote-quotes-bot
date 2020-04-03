@@ -3,6 +3,7 @@ package instagram
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"log"
 	"math"
 	"net/http"
@@ -42,10 +43,16 @@ func getInstagramResponse(instagramURL string) Response {
 	}
 
 	defer resp.Body.Close()
-
-	instagramResponse := *new(Response)
-	json.NewDecoder(resp.Body).Decode(&instagramResponse)
-	return instagramResponse
+	if resp.StatusCode == http.StatusOK {
+		instagramResponse := *new(Response)
+		json.NewDecoder(resp.Body).Decode(&instagramResponse)
+		return instagramResponse
+	} else {
+		fmt.Println("resp.StatusCode")
+		fmt.Println(resp.StatusCode)
+		instagramResponse := *new(Response)
+		return instagramResponse
+	}
 }
 
 // Reduces the complexity of the raw instagram response to a simpler format
